@@ -7,3 +7,5 @@ pdf2image
 Pillow
 pymupdf
 rapidfuzz
+pywebview
+pyinstaller

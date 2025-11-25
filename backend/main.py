@@ -1,8 +1,11 @@
 from fastapi import FastAPI, File, UploadFile, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import HTMLResponse, FileResponse
 from typing import List
 import shutil
 import os
+import sys
 import tempfile
 import fitz  # PyMuPDF
 import pytesseract
@@ -113,6 +116,32 @@ async def upload_cvs(
     
     return {"results": results}
 
-@app.get("/")
-def read_root():
-    return {"message": "CV Screening API is running"}
+# Mount static files
+# Ensure the directory exists or handle it gracefully
+# PyInstaller compatibility: detect if running from bundle
+if getattr(sys, 'frozen', False):
+    # Running from PyInstaller bundle
+    base_path = sys._MEIPASS
+    static_dir = os.path.join(base_path, "backend", "static")
+else:
+    # Running in normal Python environment
+    static_dir = os.path.join(os.path.dirname(__file__), "static")
+
+assets_dir = os.path.join(static_dir, "assets")
+
+if os.path.exists(assets_dir):
+    app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
+
+@app.get("/{full_path:path}")
+async def catch_all(full_path: str):
+    # Serve index.html for any other route (React SPA)
+    # Check if file exists in static folder first (e.g. favicon)
+    static_file_path = os.path.join(static_dir, full_path)
+    if os.path.exists(static_file_path) and os.path.isfile(static_file_path):
+        return FileResponse(static_file_path)
+        
+    # Default to index.html
+    index_path = os.path.join(static_dir, "index.html")
+    if os.path.exists(index_path):
+        return FileResponse(index_path)
+    return {"error": "Frontend not built. Please run 'npm run build' in frontend directory."}
