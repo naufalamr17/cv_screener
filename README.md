@@ -259,11 +259,11 @@ Kontribusi selalu diterima! Silakan buat pull request atau laporkan issue.
 
 ## 📄 Lisensi
 
-[Tambahkan lisensi Anda di sini]
+MIT License - Proyek ini gratis dan open source untuk digunakan oleh siapa saja.
 
 ## 👨‍💻 Author
 
-[Tambahkan informasi author di sini]
+**Naufal Ammar Hidayatulloh**
 
 ---
 
