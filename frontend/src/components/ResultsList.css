@@ -1,0 +1,98 @@
+.results-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+.results-container h3 {
+    color: #1e293b;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.results-grid {
+    display: grid;
+    gap: 20px;
+}
+
+.result-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid transparent;
+    transition: transform 0.2s;
+}
+
+.result-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.result-card.match {
+    border-left-color: #22c55e;
+}
+
+.result-card.no-match {
+    border-left-color: #ef4444;
+    opacity: 0.8;
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.filename {
+    font-weight: 700;
+    color: #1e293b;
+    font-size: 1.1rem;
+}
+
+.score-badge {
+    background: #f1f5f9;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #475569;
+}
+
+.match .score-badge {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.matched-keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.match-tag {
+    background: #fef3c7;
+    color: #92400e;
+    font-size: 0.8rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.snippet {
+    background: #f8fafc;
+    padding: 12px;
+    border-radius: 8px;
+    color: #64748b;
+    font-size: 0.9rem;
+    font-style: italic;
+    line-height: 1.5;
+}
+
+.result-error {
+    color: #ef4444;
+    background: #fee2e2;
+    padding: 10px;
+    border-radius: 8px;
+}
