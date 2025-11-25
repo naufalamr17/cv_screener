@@ -37,8 +37,11 @@ Sebelum menjalankan aplikasi, pastikan Anda telah menginstal:
    - Download dari [nodejs.org](https://nodejs.org/)
 
 3. **Tesseract OCR**
-   - **Windows**: Download installer dari [GitHub Tesseract](https://github.com/UB-Mannheim/tesseract/wiki)
-   - Install di `C:\Program Files\Tesseract-OCR\` (default)
+   - **Windows**: 
+     - **Via Terminal (Chocolatey)**: `choco install tesseract`
+     - **Via Terminal (Scoop)**: `scoop install tesseract`
+     - **Manual**: Download installer dari [GitHub Tesseract](https://github.com/UB-Mannheim/tesseract/wiki)
+     - Install di `C:\Program Files\Tesseract-OCR\` (default)
    - **Linux**: `sudo apt-get install tesseract-ocr`
    - **macOS**: `brew install tesseract`
 
