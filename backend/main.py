@@ -26,7 +26,18 @@ app.add_middleware(
 
 # --- TESSERACT CONFIGURATION ---
 # If Tesseract is not in your PATH, uncomment the line below and point to your installation
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+import platform
+
+# --- TESSERACT CONFIGURATION ---
+# Check OS to determine Tesseract path
+if os.name == 'nt':
+    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+else:
+    # On Linux/cPanel
+    # Check for TESSERACT_CMD env var, fallback to 'tesseract'
+    # This allows you to specify a custom path in cPanel if needed
+    tesseract_cmd = os.getenv('TESSERACT_CMD', 'tesseract')
+    pytesseract.pytesseract.tesseract_cmd = tesseract_cmd
 
 def extract_text_from_pdf(file_path: str) -> str:
     print(f"Processing file with PyMuPDF: {file_path}")
