@@ -1,0 +1,18 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+.venv/
+node_modules/
+dist/
+build/
+.git/
+.gitignore
+.vscode/
+.idea/
+backend/static/
+# Exclude coverage reports
+.coverage
+htmlcov/
