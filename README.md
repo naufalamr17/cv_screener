@@ -98,14 +98,56 @@ File hasil build akan disalin ke `backend/static/`
 # Kembali ke root directory
 cd ..
 
+# Masuk ke folder backend
+cd backend
+
 # Pastikan virtual environment aktif
 # Jalankan server
-uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000
+python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 #### 6. Akses Aplikasi
 
 Buka browser dan akses: `http://localhost:8000`
+
+---
+
+### 🌐 Deploy ke cPanel (Hosting)
+
+Aplikasi ini siap untuk dideploy ke cPanel yang mendukung **Setup Python App** (Phusion Passenger).
+
+#### 1. Persiapan File
+Pastikan file-file berikut ada (sudah dibuat secara otomatis):
+- `backend/passenger_wsgi.py`
+- `backend/requirements_server.txt`
+- Folder `backend/static` (hasil build frontend)
+
+#### 2. Upload
+1. Kompres (ZIP) isi dari folder `backend`. Isi zip harus langsung memuat file `main.py`, `passenger_wsgi.py`, folder `static`, dll.
+2. Upload ZIP ke **File Manager** cPanel (misal: `/home/user/cv_screener_app`).
+3. Extract file ZIP tersebut.
+
+#### 3. Setup Python App
+1. Di cPanel, buka menu **Setup Python App**.
+2. Klik **Create Application**.
+3. **Python Version**: Pilih 3.9 atau terbaru.
+4. **Application root**: Path folder tadi (misal: `cv_screener_app`).
+5. **Application startup file**: `passenger_wsgi.py`.
+6. **Application Entry point**: `application`.
+7. Klik **Create**.
+
+#### 4. Install Dependencies
+1. Di dashboard Python App, copy perintah untuk masuk ke virtual environment (opsional).
+2. Install dependencies khusus server:
+   ```bash
+   pip install -r requirements_server.txt
+   ```
+3. Klik tombol **RESTART** di dashboard Python App.
+
+#### 5. Catatan Tesseract di Server
+cPanel menggunakan Linux, jadi file `.exe` Windows tidak akan jalan.
+- **Default**: Aplikasi akan mencari perintah `tesseract` di sistem path.
+- **Custom Path**: Jika Tesseract terinstall di lokasi khusus, set Environment Variable `TESSERACT_CMD` di menu Setup Python App dengan path ke binary tesseract (contoh: `/usr/bin/tesseract`).
 
 ---
 

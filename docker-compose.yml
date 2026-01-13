@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      # Optional: Mount uploads directory if you want persistence
+      # - ./uploads:/app/backend/uploads
+      # Mount source code for development (excluding static files usually)
+      # For dev, one might run frontend separately, but for 'easier CI/CD' run check, this is fine.
+      - ./backend:/app/backend
+    environment:
+      - TESSERACT_CMD=tesseract
+    restart: unless-stopped
